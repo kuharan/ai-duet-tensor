@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 39,
+  "id": "f355362a-c3d0-4ff9-9227-1cb0a6a08352",
+  "activities": [
+    {
+      "id": "95f9a3ac-e555-4c5b-92bf-feb27d85b540",
+      "name": "DonorDataFinal",
+      "blocks": [
+        {
+          "id": "05e81d32-0436-4e6c-808a-f67a188fff15",
+          "type": "Microsoft.DPrep.ReferenceActivityBlock",
+          "arguments": {
+            "reference": {
+              "referenceType": 1,
+              "referenceContainerPath": "./DonorDataFinal.dsource",
+              "referencedActivityId": "2084d973-ca86-4545-9216-cda36dcd8670",
+              "referencedBranchId": null,
+              "referencedStep": null,
+              "anonymousSteps": null
+            }
+          }
+        },
+        {
+          "id": "ce87daa7-f910-42c4-968d-f1d6a18abbc8",
+          "type": "Microsoft.DPrep.ConvertColumnFieldTypeBlock",
+          "arguments": {
+            "columnIds": [
+              "donor_id"
+            ],
+            "decimalPoint": 0
+          }
+        },
+        {
+          "id": "45ba53ec-e4b6-422e-859d-0665826c6c21",
+          "type": "Microsoft.DPrep.ReplaceErrorsForNumberColumnBlock",
+          "arguments": {
+            "columnIds": [
+              "donor_id"
+            ],
+            "replaceWith": 0.0
+          }
+        },
+        {
+          "id": "9b5a4e76-14c0-4b6a-bde8-6b0b0d155775",
+          "type": "Microsoft.DPrep.SelectRowsOnDistinctValuesInColumnBlock",
+          "arguments": {
+            "columnIds": [
+              "donor_id"
+            ]
+          }
+        },
+        {
+          "id": "05d247d9-a338-4535-a0f2-a6a2d619303e",
+          "type": "Microsoft.DPrep.FilterNumberColumnBlock",
+          "arguments": {
+            "columnId": "age",
+            "filterResult": 0,
+            "clauseRelationship": 1,
+            "clauses": [
+              {
+                "operator": 3
+              }
+            ]
+          }
+        }
+      ],
+      "inspectors": [
+        {
+          "id": "94d3ac03-aa56-4882-9e75-d5cd980a0ad8",
+          "type": "Microsoft.DPrep.DataQualityInspector",
+          "arguments": {},
+          "reference": {
+            "referenceType": 0,
+            "referenceContainerPath": null,
+            "referencedActivityId": "95f9a3ac-e555-4c5b-92bf-feb27d85b540",
+            "referencedBranchId": null,
+            "referencedStep": {
+              "stepReferenceType": 1,
+              "referencedStepId": null,
+              "fallback": 1
+            },
+            "anonymousSteps": null
+          },
+          "isBackground": false
+        }
+      ]
+    }
+  ],
+  "runConfigurations": []
+}

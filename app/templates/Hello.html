@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Donation Prediction</title>
+    </head>
+
+    <body bgcolor="silver">
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message[1] }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h3 align="left">Input Values :</h3>
+        <br>
+        <form action="" method="post" align="left">
+
+                {{ form.csrf }}
+
+                <div class="input text" >
+                    {{ form.age.label }} <div class="text" align="left">{{ form.age }}</div>
+                </div>
+                <div class="input text">
+                    {{ form.workclass.label }} <div class="text" align="left">{{ form.workclass }}</div>
+                </div>
+                <div class="input text">
+                    {{ form.education.label }}  <div class="text" align="left">{{ form.education }}</div>
+                </div>
+                <div class="input text">
+                    {{ form.mstatus.label }}  <div class="text" align="left">{{ form.mstatus }}</div>
+                </div>
+                <div class="input text">
+                    {{ form.hoursinlast6hours.label }} <div class="text" align="left"> {{ form.hoursinlast6hours }}</div>
+                </div>
+                <div class="input text">
+                    {{ form.hoursperweek.label }}  <div class="text" align="left">{{ form.hoursperweek }}</div>
+                </div>
+                <div class="input text">
+                    {{ form.paymentmethod.label }}  <div class="text" align="left">{{ form.paymentmethod }}</div>
+                </div>
+                <br>
+                <div class="input submit">
+                    <input type="submit" value="Submit" />
+                </div>
+
+
+        </form>
+    </body>
+</html>

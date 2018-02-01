@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Range Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='uistyle.css') }}">
+    <link rel="script" type="bootstrap" href="{{ url_for('static', filename='bootstrap') }}">
+    <!--<script type="text/javascript">
+    var appInsights=window.appInsights||function(config){
+    function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+    }({
+        instrumentationKey:"5a43e2f0-2b5b-4ede-9466-15566eaf6cc2"
+    });
+    window.appInsights=appInsights;
+    appInsights.trackPageView();
+
+    </script>
+    -->
+</head>
+<body>
+
+<div class="container body-content">
+<div class="jumbotron">
+    <h2 align="center" >Donation Range Prediction</h2>
+    <p align="center" class="lead">Use Azure Machine Learning WorkBench to predict donation range !</p>
+</div>
+<div class="row">
+        <form class="form-horizontal" method = post action=""  role="form" >
+            {{ form.csrf }}
+            <fieldset>
+                <div class ="column" >
+                <div class="form-group">
+                    <label for="age" class="col-lg-4 control-label">Age</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="age" class="form-control" id="age" placeholder="29">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="workclass" class="col-lg-4 control-label">Work Class</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="workclass" id="workclass">
+                            <option value="private">Private</option>
+                            <option value="state-govt">State-Govt</option>
+                            <option value="self-emp">Self-Employed</option>
+                            <option value="loc-govt">Local-Govt</option>
+                            <option value="without-pay">Without Pay</option>
+                            <option value="never-worked">Never Worked</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Gender</label>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="Sex" id="GenderMale" value="M" checked="">Male
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="Sex" id="GenderFemale" value="F">Female
+                            </label>
+                        </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="education" class="col-lg-4 control-label">Education</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="education" id="education">
+                            <option value="M">Master's Degree</option>
+                            <option value="B">Bachelor's Degree</option>
+                            <option value="H">High School</option>
+                            <option value="D">Doctorate</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Marital Status</label>
+
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="maritalstatus" id="single" value="single" >
+                                Single
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="maritalstatus" id="Married" value="Married" checked="checked">
+                                Married
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="maritalstatus" id="Divorced" value="Divorced">
+                                Divorced
+                            </label>
+                        </div>
+                </div>
+                </div>
+                <div class="column">
+                <div class="form-group">
+                    <label for="hoursinlast6months" class="col-lg-4 control-label">Volunteer hrs (6 Months)</label>
+                    <div class="col-lg-8">
+                         <input type="text" name="hoursinlast6months" class="form-control" id="hoursinlast6months" placeholder="99">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="occupation" class="col-lg-4 control-label">Occupation</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="occupation" id="occupation">
+                            <option value="Other-Services">Other-Services</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Tech-Support">Tech-Support</option>
+                            <option value="Trans">Transport</option>
+                            <option value="Admin-Cleric">Admin-Clerical</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hoursperweek" class="col-lg-4 control-label">Hours Per Week</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="hoursperweek" class="form-control" id="hoursperweek" placeholder="40">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Income</label>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="morethan50" id="morethan50" value="morethan50" checked="checked">&gt;=50k
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="lessthan50" id="lessthan50" value="lessthan50" >&lt;50k
+                            </label>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="paymentmethod" class="col-lg-4 control-label">Payment Method</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="paymentmethod" id="paymentmethod" >
+                            <option value="paypal">Paypal</option>
+                            <option value="cheque">Cheque</option>
+                            <option value="amazon">Amazon</option>
+                            <option value="credit">Credit Card</option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+
+
+                <div class="form-group" align="center">
+
+                       <button type="reset" class="btn btn-default">Cancel</button>
+                       <button type="submit" class="btn btn-primary">Submit</button>
+
+                </div>
+            </fieldset>
+        </form>
+</div>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+
+            {% for message in messages %}
+                {% if "Error" not in message[1]: %}
+                    <div class="alert alert-info" role="alert" align="center">
+                    <strong>Result : </strong> {{ message[1] }}
+                    </div>
+                {% endif %}
+
+                {% if "Error" in message[1]: %}
+                    <div class="alert alert-warning">
+                    {{ message[1] }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+                {% endif %}
+            {% endwith %}
+</div>
+</body>
+</html>

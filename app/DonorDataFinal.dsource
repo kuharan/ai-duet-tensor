@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 39,
+  "id": "2673d15a-9035-4dad-987b-acd566720b55",
+  "activities": [
+    {
+      "id": "2084d973-ca86-4545-9216-cda36dcd8670",
+      "name": "DonorDataFinal",
+      "blocks": [
+        {
+          "id": "736232be-5467-4965-bb25-b91002a3f185",
+          "type": "Microsoft.DPrep.DataSourceBlock",
+          "arguments": {
+            "path": {
+              "target": 0,
+              "resourceDetails": [
+                {
+                  "path": "E:\\Kuharan\\AzureML\\Iris\\IrisDataClassification\\DonorDataFinal.csv"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "43816da3-62f4-44c8-8df4-a041b7fea068",
+          "type": "Microsoft.DPrep.ParseDelimitedBlock",
+          "arguments": {
+            "preview": false,
+            "columnHeadersMode": 1,
+            "separator": ",",
+            "fileEncoding": 0,
+            "skipRowsMode": 0,
+            "handleQuotedLineBreaks": false
+          }
+        },
+        {
+          "id": "b0bd1ec0-4899-4269-80bc-62b7dd126245",
+          "type": "Microsoft.DPrep.SetColumnTypesBlock",
+          "arguments": {
+            "columnConversion": [
+              {
+                "columnId": "age",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "Hours volunteered in last 6 months",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "hours-per-week",
+                "typeProperty": 3,
+                "typeArguments": {}
+              }
+            ]
+          }
+        },
+        {
+          "id": "a59e73b6-4df0-4a3d-94f0-15fc1ecec9af",
+          "type": "Microsoft.DPrep.SampleBlock",
+          "arguments": {
+            "samples": [
+              {
+                "sampleId": "ebed3826-f20a-4ed6-b132-362bcd92fe96",
+                "sampleRevision": "8bfe79d6-7347-4e99-b513-3cccf1969a10",
+                "sampleName": "Full File",
+                "sampleRunner": {
+                  "id": null,
+                  "type": 0
+                },
+                "remoteGeneratorProperties": {},
+                "sampleStrategy": 3,
+                "topArguments": {
+                  "sampleCount": 10000
+                },
+                "randomNArguments": {
+                  "sampleCount": 10000
+                },
+                "randomPercentArguments": {
+                  "probability": 0.1
+                },
+                "allowAutoGen": true,
+                "isDisabled": false
+              }
+            ],
+            "activeSample": "ebed3826-f20a-4ed6-b132-362bcd92fe96"
+          }
+        },
+        {
+          "id": "b3e05676-dc6a-4607-8077-ce3aaca45792",
+          "type": "Microsoft.DPrep.HandlePathColumnBlock",
+          "arguments": {
+            "pathColumnOperation": 0
+          }
+        }
+      ],
+      "inspectors": [
+        {
+          "id": "b339f654-1904-419d-8143-d90ff8ec179d",
+          "type": "Microsoft.DPrep.DataQualityInspector",
+          "arguments": {},
+          "reference": {
+            "referenceType": 0,
+            "referenceContainerPath": null,
+            "referencedActivityId": "2084d973-ca86-4545-9216-cda36dcd8670",
+            "referencedBranchId": null,
+            "referencedStep": {
+              "stepReferenceType": 1,
+              "referencedStepId": null,
+              "fallback": 1
+            },
+            "anonymousSteps": null
+          },
+          "isBackground": false
+        }
+      ]
+    }
+  ],
+  "runConfigurations": []
+}

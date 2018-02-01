@@ -1,0 +1,8 @@
+Flask==0.12.1
+WTForms
+waitress==1.0.1
+azureml
+azureml.datacollector
+azureml-model-management-sdk
+sklearn
+scipy
