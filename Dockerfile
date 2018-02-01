@@ -1,4 +1,4 @@
-FROM python:2.7-slim-stretch
+FROM python:3.6-slim-stretch
 MAINTAINER Prashanth Madi<prashanthrmadi@gmail.com>
 
 ENV DEPLOYMENT_TARGET=/app
